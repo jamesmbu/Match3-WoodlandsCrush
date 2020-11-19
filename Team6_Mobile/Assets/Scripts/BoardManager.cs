@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
 {
@@ -86,6 +87,11 @@ public class BoardManager : MonoBehaviour
                 if (elements[x, y].isMovable())
                 {
                     elements[x, y].MovableComponent.Move(x, y);
+                }
+                // Set appearance of animal
+                if (elements[x, y].appearanceIsSet())
+                {
+                    elements[x, y].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)Random.Range(0, elements[x, y].AppearanceComponent.AppearancesCount));
                 }
             }
         }

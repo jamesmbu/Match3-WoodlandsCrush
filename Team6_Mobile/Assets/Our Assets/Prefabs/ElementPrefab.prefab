@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2061307088767195772}
   - component: {fileID: 2275558424255132104}
   - component: {fileID: 8264322362989028022}
+  - component: {fileID: 1859737482200941624}
   m_Layer: 0
   m_Name: fox
   m_TagString: Untagged
@@ -108,3 +109,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905ed2b6dc98cf049af046b1f86ad555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1859737482200941624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680401513162534258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c295995b668a92d448ac9911321a9d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteAppearances:
+  - appearance: 0
+    sprite: {fileID: 21300000, guid: fe94beffbde91874eb96af39c3e1abb8, type: 3}
+  - appearance: 1
+    sprite: {fileID: 21300000, guid: a0224bfeb362b2e42885fefe989f4ba2, type: 3}
+  - appearance: 2
+    sprite: {fileID: 21300000, guid: f716b6d7648357e4990379c5e243f992, type: 3}
+  - appearance: 3
+    sprite: {fileID: 21300000, guid: b99f07fc4647ee549b6f2564341b8da7, type: 3}

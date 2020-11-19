@@ -24,7 +24,6 @@ public class MovableElement : MonoBehaviour
 
     public void Move(int toX, int toY)
     {
-        Debug.Log(toX);
         gameElement.X = toX;
         gameElement.Y = toY;
 

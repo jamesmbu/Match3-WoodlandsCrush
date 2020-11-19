@@ -12,7 +12,9 @@ public class GameElement : MonoBehaviour
 
     private BoardManager boardManager;
 
-    private MovableElement movableComponent;
+    private MovableElement movableComponent; // handler for movement
+
+    private ElementAppearance appearanceComponent; // handler for appearance
 
     public int X
     {
@@ -36,6 +38,7 @@ public class GameElement : MonoBehaviour
             }
         }
     }
+
     public BoardManager.ElementType Type
     {
         get { return type; }
@@ -44,15 +47,20 @@ public class GameElement : MonoBehaviour
     {
         get { return boardManager; }
     }
-
     public MovableElement MovableComponent
     {
         get { return movableComponent; }
+    }
+    public ElementAppearance AppearanceComponent
+    {
+        get { return appearanceComponent; }
     }
 
     void Awake()
     {
         movableComponent = GetComponent<MovableElement>();
+        appearanceComponent = GetComponent<ElementAppearance>();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -77,6 +85,10 @@ public class GameElement : MonoBehaviour
     public bool isMovable()
     {
         return movableComponent != null;
+    }
+    public bool appearanceIsSet()
+    {
+        return appearanceComponent != null;
     }
 }
 
