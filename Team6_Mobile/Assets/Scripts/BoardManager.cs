@@ -9,11 +9,15 @@ public class BoardManager : MonoBehaviour
     // types of elements which can fill the board
     public enum ElementType
     {
-        NORMAL,
-        COUNT,
+        Empty,
+        Normal,
+        Count,
     }
     // grid dimensions
     public int width, height;
+
+    // time for the grid to fill up with elements
+    public float fillTime = 1.0f;
 
     // struct to define each element as having a type and prefab
     [System.Serializable]
@@ -74,30 +78,32 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                GameObject newElement = (GameObject)Instantiate(elementPrefabDictionary[ElementType.NORMAL],
-                    Vector3.zero, Quaternion.identity, transform);
-                //elements[x,y] = (GameElement)Instantiate(elementPrefabDictionary[ElementType.NORMAL],
-                //    new Vector3(x, y, 0), Quaternion.identity);
-                newElement.name = "Element (" + x + "," + y + ")";
+                // Fill the board with empty prefabs initially. The actual ones will fall onto the board soon after.
+                SpawnElement(x, y, ElementType.Empty);
+                //GameObject newElement = (GameObject)Instantiate(elementPrefabDictionary[ElementType.Normal],
+                //    Vector3.zero, Quaternion.identity, transform);
 
-                elements[x, y] = newElement.GetComponent<GameElement>();
-                elements[x, y].Init(x, y, this, ElementType.NORMAL);
+                //newElement.name = "Element (" + x + "," + y + ")";
 
-                // Move the animal element locally to the board
-                if (elements[x, y].isMovable())
-                {
-                    elements[x, y].MovableComponent.Move(x, y);
-                }
-                // Set appearance of animal
-                if (elements[x, y].appearanceIsSet())
-                {
-                    elements[x, y].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)Random.Range(0, elements[x, y].AppearanceComponent.AppearancesCount));
-                }
+                //elements[x, y] = newElement.GetComponent<GameElement>();
+                //elements[x, y].Init(x, y, this, ElementType.Normal);
+
+                //// Move the animal element locally to the board
+                //if (elements[x, y].isMovable())
+                //{
+                //    elements[x, y].MovableComponent.Move(x, y);
+                //}
+                //// Set appearance of animal
+                //if (elements[x, y].appearanceIsSet())
+                //{
+                //    elements[x, y].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)Random.Range(0, elements[x, y].AppearanceComponent.AppearancesCount));
+                //}
             }
         }
 
+
         AlignBoard();
-        
+        StartCoroutine(Fill());
     }
 
     // Update is called once per frame
@@ -106,10 +112,75 @@ public class BoardManager : MonoBehaviour
         
     }
 
+    public IEnumerator Fill()
+    {
+        while (FillStep())
+        {
+            /* Function is called until it returns false */
+            yield return new WaitForSeconds(fillTime);
+        }
+
+    }
+
+    public bool FillStep()
+    {
+        bool bMovedPiece = false;
+        
+        // looping from bottom to top of board, as it makes sense logically
+        for (int y = 1; y <height; y++) // -2 means that the bottom row isn't checked- there is nothing below it.
+        {
+            for (int x = 0; x < width; x++)
+            {
+                GameElement element = elements[x, y];
+                if (element.isMovable())
+                {
+                    GameElement elementBelow = elements[x, y - 1]; 
+                    if (elementBelow.Type == ElementType.Empty)
+                    {
+                        element.MovableComponent.Move(x, y - 1); 
+                        elements[x, y - 1] = element; // bring the element to its new space below
+                        SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
+                        bMovedPiece = true;
+                    }
+                }
+            }
+        }
+        // check the top row for empty pieces
+        for (int x = 0; x < width; x++)
+        {
+            GameElement elementBelow = elements[x, height-1];
+
+            if (elementBelow.Type == ElementType.Empty)
+            {
+                GameObject newElement = (GameObject) Instantiate(elementPrefabDictionary[ElementType.Normal],
+                    new Vector3(x, -1), Quaternion.identity, transform);
+
+                elements[x, height-1] = newElement.GetComponent<GameElement>();
+                elements[x, height-1].Init(x, height, this, ElementType.Normal);
+                elements[x, height-1].MovableComponent.Move(x, height-1);
+                elements[x, height-1].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)
+                    Random.Range(0, elements[x, height-1].AppearanceComponent.AppearancesCount));
+                bMovedPiece = true;
+            }
+        }
+        return bMovedPiece;
+    }
+
     public Vector2 GetWorldPosition(int x, int y)
     {
         return new Vector2(transform.position.x - width / 2.0f + x,
             transform.position.y + height / 2.0f - y);
+    }
+
+    public GameElement SpawnElement(int x, int y, ElementType type)
+    { 
+        GameObject newElement = (GameObject) Instantiate(elementPrefabDictionary[type],
+            new Vector3(x, y, 0), Quaternion.identity, transform);
+
+        elements[x, y] = newElement.GetComponent<GameElement>();
+        elements[x, y].Init(x, y, this, type);
+
+        return elements[x, y];
     }
 
     void AlignBoard()
