@@ -28,7 +28,7 @@ public class BoardManager : MonoBehaviour
     // use a dictionary for internal logic. Dictionaries are not visible for the editor
     private Dictionary<ElementType, GameObject> elementPrefabDictionary;
     
-    public GameObject[,] elements;
+    public GameElement[,] elements;
 
     private Vector2 screenBounds;
 
@@ -40,10 +40,12 @@ public class BoardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // set initial location before anything is done
         _position = transform.position;
         _position.x = 0.0f;
         _position.y = 0.0f;
         transform.position = _position;
+
         // load each value from the 'ElementPrefab' array to the dictionary
         elementPrefabDictionary = new Dictionary<ElementType, GameObject>();
         for (int i = 0; i < elementPrefabs.Length; i++)
@@ -66,15 +68,25 @@ public class BoardManager : MonoBehaviour
         }
 
         // instantiate elements (animals)
-        elements = new GameObject[width,height]; // the game object array is instantiated with the same dimensions as the grid
+        elements = new GameElement[width,height]; // the game object array is instantiated with the same dimensions as the grid
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                elements[x,y] = (GameObject)Instantiate(elementPrefabDictionary[ElementType.NORMAL],
-                    new Vector3(x, y, 0), Quaternion.identity);
-                elements[x, y].name = "Element (" + x + "," + y + ")";
-                elements[x, y].transform.parent = transform;
+                GameObject newElement = (GameObject)Instantiate(elementPrefabDictionary[ElementType.NORMAL],
+                    Vector3.zero, Quaternion.identity, transform);
+                //elements[x,y] = (GameElement)Instantiate(elementPrefabDictionary[ElementType.NORMAL],
+                //    new Vector3(x, y, 0), Quaternion.identity);
+                newElement.name = "Element (" + x + "," + y + ")";
+
+                elements[x, y] = newElement.GetComponent<GameElement>();
+                elements[x, y].Init(x, y, this, ElementType.NORMAL);
+
+                // Move the animal element locally to the board
+                if (elements[x, y].isMovable())
+                {
+                    elements[x, y].MovableComponent.Move(x, y);
+                }
             }
         }
 
@@ -88,13 +100,10 @@ public class BoardManager : MonoBehaviour
         
     }
 
-    Vector2 GetWorldPosition(int x, int y)
+    public Vector2 GetWorldPosition(int x, int y)
     {
-        screenBounds =
-            Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        
-        return new Vector2(transform.position.x - tileWidth - (screenBounds.x*-1) + x,
-            transform.position.y - height / 2.0f + y);
+        return new Vector2(transform.position.x - width / 2.0f + x,
+            transform.position.y + height / 2.0f - y);
     }
 
     void AlignBoard()
@@ -110,19 +119,19 @@ public class BoardManager : MonoBehaviour
 
         // get width of tile (the height is the same, 1:1)
         tileWidth = tilePrefab.transform.GetComponent<SpriteRenderer>().bounds.size.x; // tile width in the world
-        Debug.Log("Tile Width: " + tileWidth);
+        //Debug.Log("Tile Width: " + tileWidth);
         
         // get screen width (the desired width of the board for a perfect fit)
         float screenWidth = screenBounds.x * 2.0f;
-        Debug.Log("Screen Width: " + screenWidth);
+        //Debug.Log("Screen Width: " + screenWidth);
         
         // get width of the board (width of all tiles in a line added up) -> (the actual board width)
         float boardWidth = tileWidth * width;
-        Debug.Log("Board Width: " + boardWidth);
+        //Debug.Log("Board Width: " + boardWidth);
         
         // get the multiplier which brings the actual width to the desired width
         float desiredWidthFactor = screenWidth / boardWidth;
-        Debug.Log("Desired Width Multiplier: " + desiredWidthFactor);
+        //Debug.Log("Desired Width Multiplier: " + desiredWidthFactor);
 
         // set new width values
         tileWidth *= desiredWidthFactor*0.95f; // 0.95 gives a 5% margin of space on the width (should change hardcoded value to variable)
@@ -138,7 +147,7 @@ public class BoardManager : MonoBehaviour
         
         // get height of the board (height of all tiles in a column added up) -> (the actual board height)
         float boardHeight = tileWidth * height; // tile width and height are 1:1
-        Debug.Log("Board Height: " + boardHeight);
+        //Debug.Log("Board Height: " + boardHeight);
 
         // re-scale the board
         transform.localScale *= desiredWidthFactor*0.95f;

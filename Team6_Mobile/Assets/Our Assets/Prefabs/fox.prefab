@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 360640756456566272}
   - component: {fileID: 2061307088767195772}
+  - component: {fileID: 2275558424255132104}
+  - component: {fileID: 8264322362989028022}
   m_Layer: 0
   m_Name: fox
   m_TagString: Untagged
@@ -82,3 +84,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2275558424255132104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680401513162534258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e9e77cfbda13c44b67120b53969114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8264322362989028022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680401513162534258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905ed2b6dc98cf049af046b1f86ad555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
