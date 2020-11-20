@@ -68,6 +68,11 @@ public class GameElement : MonoBehaviour
 
     }
 
+    public void DestroyMe()
+    {
+        Destroy(this.gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -90,6 +95,7 @@ public class GameElement : MonoBehaviour
     {
         return appearanceComponent != null;
     }
+    
 }
 
 

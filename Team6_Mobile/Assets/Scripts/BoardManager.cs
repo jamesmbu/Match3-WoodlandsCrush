@@ -144,6 +144,7 @@ public class BoardManager : MonoBehaviour
                     GameElement elementBelow = elements[x, y - 1]; 
                     if (elementBelow.Type == ElementType.Empty)
                     {
+                        Destroy(elementBelow.gameObject);
                         element.MovableComponent.Move(x, y - 1, fillTime); 
                         elements[x, y - 1] = element; // bring the element to its new space below
                         SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
@@ -160,6 +161,9 @@ public class BoardManager : MonoBehaviour
 
             if (elementBelow.Type == ElementType.Empty)
             {
+                Destroy(elementBelow.gameObject);
+                
+                Debug.Log(elementBelow.gameObject.name);
                 GameObject newElement = (GameObject) Instantiate(elementPrefabDictionary[ElementType.Normal],
                     Vector3.zero, Quaternion.identity, transform);
                 
