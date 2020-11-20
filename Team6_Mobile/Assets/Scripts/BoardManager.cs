@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,7 @@ public class BoardManager : MonoBehaviour
     public int width, height;
 
     // time for the grid to fill up with elements
-    public float fillTime = 1.0f;
+    public float fillTime = 0.5f;
 
     // struct to define each element as having a type and prefab
     [System.Serializable]
@@ -114,6 +115,7 @@ public class BoardManager : MonoBehaviour
 
     public IEnumerator Fill()
     {
+        // Debug.Log("Starts here (IENUM)");
         while (FillStep())
         {
             /* Function is called until it returns false */
@@ -125,19 +127,61 @@ public class BoardManager : MonoBehaviour
     public bool FillStep()
     {
         bool bMovedPiece = false;
-        
-        // looping from bottom to top of board, as it makes sense logically
-        for (int y = 1; y <height; y++) // -2 means that the bottom row isn't checked- there is nothing below it.
+        // looping from bottom to top of board
+        for (int y = height-2; y >= 0; y--) // -2 means that the bottom row isn't checked- there is nothing below it.
         {
             for (int x = 0; x < width; x++)
             {
                 GameElement element = elements[x, y];
                 if (element.isMovable())
                 {
+                    GameElement elementBelow = elements[x, y + 1]; 
+                    if (elementBelow.Type == ElementType.Empty)
+                    {
+                        element.MovableComponent.Move(x, y + 1, fillTime); 
+                        elements[x, y + 1] = element; // bring the element to its new space below
+                        SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
+                        bMovedPiece = true;
+                    }
+                }
+            }
+        }
+        // check the top row for empty pieces
+        for (int x = 0; x < width; x++)
+        {
+            GameElement elementBelow = elements[x, 0];
+
+            if (elementBelow.Type == ElementType.Empty)
+            {
+                GameObject newElement = (GameObject) Instantiate(elementPrefabDictionary[ElementType.Normal],
+                    Vector3.zero, Quaternion.identity, transform);
+                
+                if (newElement.GetComponent<MovableElement>())
+                {
+                    newElement.GetComponent<MovableElement>().Move(x,-1,0);
+                    
+                }
+                elements[x, 0] = newElement.GetComponent<GameElement>();
+                elements[x, 0].Init(x, -1, this, ElementType.Normal);
+                elements[x, 0].MovableComponent.Move(x, 0, fillTime);
+                elements[x, 0].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)
+                    Random.Range(0, elements[x, 0].AppearanceComponent.AppearancesCount));
+                bMovedPiece = true;
+            }
+        }
+        /*// looping from bottom to top of board, as it makes sense logically
+        for (int y = 1; y <height; y++) // -2 means that the bottom row isn't checked- there is nothing below it.
+        {
+            for (int x = 0; x < width; x++)
+            {
+                
+                GameElement element = elements[x, y];
+                if (element.isMovable())
+                {
                     GameElement elementBelow = elements[x, y - 1]; 
                     if (elementBelow.Type == ElementType.Empty)
                     {
-                        element.MovableComponent.Move(x, y - 1); 
+                        element.MovableComponent.Move(x, y - 1, fillTime); 
                         elements[x, y - 1] = element; // bring the element to its new space below
                         SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
                         bMovedPiece = true;
@@ -156,13 +200,13 @@ public class BoardManager : MonoBehaviour
                     new Vector3(x, -1), Quaternion.identity, transform);
 
                 elements[x, height-1] = newElement.GetComponent<GameElement>();
-                elements[x, height-1].Init(x, height, this, ElementType.Normal);
-                elements[x, height-1].MovableComponent.Move(x, height-1);
+                elements[x, height-1].Init(x, height+1, this, ElementType.Normal);
+                elements[x, height-1].MovableComponent.Move(x, height, fillTime);
                 elements[x, height-1].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)
                     Random.Range(0, elements[x, height-1].AppearanceComponent.AppearancesCount));
                 bMovedPiece = true;
             }
-        }
+        }*/
         return bMovedPiece;
     }
 
