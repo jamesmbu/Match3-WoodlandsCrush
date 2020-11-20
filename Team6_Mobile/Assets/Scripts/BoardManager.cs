@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour
     {
         Empty,
         Normal,
+        Obstacle,
         Count,
     }
     // grid dimensions
@@ -43,6 +44,8 @@ public class BoardManager : MonoBehaviour
     private float tileHeight;
 
     private int topRowIndex;
+
+    private bool inverse = false;
     private Vector3 _position;
 
     // Start is called before the first frame update
@@ -82,31 +85,33 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                // Fill the board with empty prefabs initially. The actual ones will fall onto the board soon after.
+                // Fill the board with empty prefabs initially. The actual animals will fall onto the board soon after.
                 SpawnElement(x, y, ElementType.Empty);
-                //GameObject newElement = (GameObject)Instantiate(elementPrefabDictionary[ElementType.Normal],
-                //    Vector3.zero, Quaternion.identity, transform);
+                /*GameObject newElement = (GameObject)Instantiate(elementPrefabDictionary[ElementType.Normal],
+                    Vector3.zero, Quaternion.identity, transform);
 
-                //newElement.name = "Element (" + x + "," + y + ")";
+                newElement.name = "Element (" + x + "," + y + ")";
 
-                //elements[x, y] = newElement.GetComponent<GameElement>();
-                //elements[x, y].Init(x, y, this, ElementType.Normal);
+                elements[x, y] = newElement.GetComponent<GameElement>();
+                elements[x, y].Init(x, y, this, ElementType.Normal);
 
-                //// Move the animal element locally to the board
-                //if (elements[x, y].isMovable())
-                //{
-                //    elements[x, y].MovableComponent.Move(x, y);
-                //}
-                //// Set appearance of animal
-                //if (elements[x, y].appearanceIsSet())
-                //{
-                //    elements[x, y].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)Random.Range(0, elements[x, y].AppearanceComponent.AppearancesCount));
-                //}
+                // Move the animal element locally to the board
+                if (elements[x, y].isMovable())
+                {
+                    elements[x, y].MovableComponent.Move(x, y);
+                }
+                // Set appearance of animal
+                if (elements[x, y].appearanceIsSet())
+                {
+                    elements[x, y].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)Random.Range(0, elements[x, y].AppearanceComponent.AppearancesCount));
+                }*/
             }
         }
-
-
+        Destroy(elements[3, 3].gameObject);
+        SpawnElement(3, 3, ElementType.Obstacle);
         AlignBoard();
+        
+        
         StartCoroutine(Fill());
     }
 
@@ -122,6 +127,7 @@ public class BoardManager : MonoBehaviour
         while (FillStep())
         {
             /* Function is called until it returns false */
+            inverse = !inverse;
             yield return new WaitForSeconds(fillTime);
         }
 
@@ -131,17 +137,21 @@ public class BoardManager : MonoBehaviour
     {
         bool bMovedPiece = false;
         // looping from bottom to top of board
-        for (int y = 1; y < height; y++) // -2 means that the bottom row isn't checked- there is nothing below it.
+        for (int y = 1; y < height; y++) // starts at index 1, as for index 0 there is nothing below it.
         {
-            
-            for (int x = 0; x < width; x++)
+            for (int loopX = 0; loopX < width; loopX++)
             {
-                
+                int x = loopX;
+                if (inverse)
+                {
+                    x = width - 1 - loopX; // makes loop go from end -> start
+                }
+
                 GameElement element = elements[x, y];
                 if (element.isMovable())
                 {
-                    
-                    GameElement elementBelow = elements[x, y - 1]; 
+                    // Downwards Movement
+                    GameElement elementBelow = elements[x, y - 1];
                     if (elementBelow.Type == ElementType.Empty)
                     {
                         Destroy(elementBelow.gameObject);
@@ -149,6 +159,54 @@ public class BoardManager : MonoBehaviour
                         elements[x, y - 1] = element; // bring the element to its new space below
                         SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
                         bMovedPiece = true;
+                    }
+                    // Diagonal Movement
+                    else
+                    {
+                        for (int diag = -1; diag <= 1; diag++) // -1: left; +1: right
+                        {
+                            if (diag == 0) continue; 
+                            // yield the index which will denote the position either to the left or right
+                            int diagX = x + diag;
+
+                            if (inverse)
+                            {
+                                diagX = x - diag;
+                            }
+
+                            if (diagX < 0 || diagX >= width) continue; // check if the value is within the bounds of the board
+
+                            GameElement diagonalPiece = elements[diagX, y - 1]; // get ref to the element below diagonally to the element
+
+                            if (diagonalPiece.Type != ElementType.Empty) continue; // check if the value is empty; if so, it needs filling
+
+                            bool bHasPieceAbove = true;
+
+                            for (int aboveY = y; aboveY >= 0; aboveY--) // loop through whatever is above the diagonal subject
+                            {
+                                GameElement pieceAbove = elements[diagX, aboveY];
+
+                                if (pieceAbove.isMovable()) // if there is a movable element above
+                                {
+                                    break; // end the loop; the movable element above the diagonal subject element will fill the space instead
+                                }
+                                else if (!pieceAbove.isMovable() && pieceAbove.Type != ElementType.Empty) // if the element above cannot move and isn't empty
+                                {
+                                    bHasPieceAbove = false;
+                                    break;
+                                }
+                            }
+
+                            if (!bHasPieceAbove)
+                            {   // then diagonal movement commences
+                                Destroy(diagonalPiece.gameObject);
+                                element.MovableComponent.Move(diagX, y - 1, fillTime);
+                                elements[diagX, y - 1] = element;
+                                SpawnElement(x, y, ElementType.Empty);
+                                bMovedPiece = true;
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -163,7 +221,6 @@ public class BoardManager : MonoBehaviour
             {
                 Destroy(elementBelow.gameObject);
                 
-                Debug.Log(elementBelow.gameObject.name);
                 GameObject newElement = (GameObject) Instantiate(elementPrefabDictionary[ElementType.Normal],
                     Vector3.zero, Quaternion.identity, transform);
                 
