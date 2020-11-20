@@ -42,7 +42,7 @@ public class MovableElement : MonoBehaviour
     {
         gameElement.X = toX;
         gameElement.Y = toY;
-
+         
         Vector3 startPos = gameElement.transform.localPosition;
         Vector3 endPos = gameElement.transform.localPosition = new Vector3(toX, toY, 0);
         

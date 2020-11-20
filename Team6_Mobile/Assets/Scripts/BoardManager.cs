@@ -41,11 +41,14 @@ public class BoardManager : MonoBehaviour
     private float tileWidth;
 
     private float tileHeight;
+
+    private int topRowIndex;
     private Vector3 _position;
 
     // Start is called before the first frame update
     void Start()
     {
+        topRowIndex = height - 1;
         // set initial location before anything is done
         _position = transform.position;
         _position.x = 0.0f;
@@ -128,18 +131,21 @@ public class BoardManager : MonoBehaviour
     {
         bool bMovedPiece = false;
         // looping from bottom to top of board
-        for (int y = height-2; y >= 0; y--) // -2 means that the bottom row isn't checked- there is nothing below it.
+        for (int y = 1; y < height; y++) // -2 means that the bottom row isn't checked- there is nothing below it.
         {
+            
             for (int x = 0; x < width; x++)
             {
+                
                 GameElement element = elements[x, y];
                 if (element.isMovable())
                 {
-                    GameElement elementBelow = elements[x, y + 1]; 
+                    
+                    GameElement elementBelow = elements[x, y - 1]; 
                     if (elementBelow.Type == ElementType.Empty)
                     {
-                        element.MovableComponent.Move(x, y + 1, fillTime); 
-                        elements[x, y + 1] = element; // bring the element to its new space below
+                        element.MovableComponent.Move(x, y - 1, fillTime); 
+                        elements[x, y - 1] = element; // bring the element to its new space below
                         SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
                         bMovedPiece = true;
                     }
@@ -149,7 +155,8 @@ public class BoardManager : MonoBehaviour
         // check the top row for empty pieces
         for (int x = 0; x < width; x++)
         {
-            GameElement elementBelow = elements[x, 0];
+            
+            GameElement elementBelow = elements[x, topRowIndex];
 
             if (elementBelow.Type == ElementType.Empty)
             {
@@ -158,14 +165,13 @@ public class BoardManager : MonoBehaviour
                 
                 if (newElement.GetComponent<MovableElement>())
                 {
-                    newElement.GetComponent<MovableElement>().Move(x,-1,0);
-                    
+                    newElement.GetComponent<MovableElement>().Move(x,topRowIndex+1,0);
                 }
-                elements[x, 0] = newElement.GetComponent<GameElement>();
-                elements[x, 0].Init(x, -1, this, ElementType.Normal);
-                elements[x, 0].MovableComponent.Move(x, 0, fillTime);
-                elements[x, 0].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)
-                    Random.Range(0, elements[x, 0].AppearanceComponent.AppearancesCount));
+                elements[x, topRowIndex] = newElement.GetComponent<GameElement>();
+                elements[x, topRowIndex].Init(x, -1, this, ElementType.Normal);
+                elements[x, topRowIndex].MovableComponent.Move(x, topRowIndex, fillTime);
+                elements[x, topRowIndex].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)
+                    Random.Range(0, elements[x, topRowIndex].AppearanceComponent.AppearancesCount));
                 bMovedPiece = true;
             }
         }
