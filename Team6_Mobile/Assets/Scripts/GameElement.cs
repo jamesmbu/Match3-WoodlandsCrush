@@ -68,17 +68,26 @@ public class GameElement : MonoBehaviour
 
     }
 
-    public void DestroyMe()
-    {
-        Destroy(this.gameObject);
-    }
-
     // Update is called once per frame
     void Update()
     {
 
     }
 
+    void OnMouseEnter()
+    {
+        boardManager.EnterElement(this);
+    }
+
+    void OnMouseDown()
+    {
+        boardManager.PressElement(this);
+    }
+
+    void OnMouseUp()
+    {
+        boardManager.ReleaseElement();
+    }
     public void Init(int _x, int _y, BoardManager _boardManager, BoardManager.ElementType _type)
     {
         x = _x;

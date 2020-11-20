@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
 {
-    // types of elements which can fill the board
+    // Types of elements which can fill the board
     public enum ElementType
     {
         Empty,
@@ -15,13 +15,10 @@ public class BoardManager : MonoBehaviour
         Obstacle,
         Count,
     }
-    // grid dimensions
+    // Grid dimensions
     public int width, height;
 
-    // time for the grid to fill up with elements
-    public float fillTime = 0.5f;
-
-    // struct to define each element as having a type and prefab
+    // Struct to define each element as having a type and prefab
     [System.Serializable]
     public struct ElementPrefab
     {
@@ -29,22 +26,30 @@ public class BoardManager : MonoBehaviour
         public GameObject prefab;
     }
 
-    // make an array of the struct for the editor
+    // Make an array of the struct for the editor
     public ElementPrefab[] elementPrefabs;
+
+    // Tile prefab
     public GameObject tilePrefab;
-    // use a dictionary for internal logic. Dictionaries are not visible for the editor
+
+    // Use a dictionary for internal logic. Dictionaries are not visible for the editor
     private Dictionary<ElementType, GameObject> elementPrefabDictionary;
     
+    // 2D array of all elements of the board
     public GameElement[,] elements;
 
+    // Grid Alignment & Scaling
     private Vector2 screenBounds;
-
     private float tileWidth;
-
     private float tileHeight;
+    
+    // Player Interaction
+    private GameElement pressedElement;
+    private GameElement enteredElement;
 
+    // Miscellaneous
+    public float fillTime = 0.5f; // animation time
     private int topRowIndex;
-
     private bool inverse = false;
     private Vector3 _position;
 
@@ -107,8 +112,14 @@ public class BoardManager : MonoBehaviour
                 }*/
             }
         }
+
+        // NOTE: Make obstacle spawning designer friendly! TBD
         Destroy(elements[3, 3].gameObject);
         SpawnElement(3, 3, ElementType.Obstacle);
+
+        Destroy(elements[4, 3].gameObject);
+        SpawnElement(4, 3, ElementType.Obstacle);
+
         AlignBoard();
         
         
@@ -346,5 +357,46 @@ public class BoardManager : MonoBehaviour
         _position.x = 0.0f - (boardWidth / 2.0f) + (tileWidth / 2);//(tileWidth / 2) + (screenBounds.x * -1); // half-width plus left-most bound of the screen
         _position.y = 0.0f - (boardHeight / 2.0f) + (tileWidth / 2);//(tileWidth / 2) + ((screenBounds.y * -1));
         transform.position = _position;
+    }
+
+    public bool IsAdjacent(GameElement element1, GameElement element2) // Checking if two elements are next to each other (1 tile square radius)
+    {
+        return (element1.X == element2.X && (int) Mathf.Abs(element1.Y - element2.Y) == 1
+                || element1.Y == element2.Y && (int)Mathf.Abs(element1.X - element2.X) == 1);
+    }
+
+    public void SwapElements(GameElement element1, GameElement element2) // Swap two elements positions
+    { 
+        if (element1.isMovable() && element2.isMovable()) // If both elements have movement capabilities
+        {
+            // Swap the elements in the array
+            elements[element1.X, element1.Y] = element2;
+            elements[element2.X, element2.Y] = element1;
+
+            // Store one of the elements X and Y position to use as reference
+            int element1X = element1.X;
+            int element1Y = element1.Y;
+
+            // Facilitate the visual movement of the pair
+            element1.MovableComponent.Move(element2.X, element2.Y, fillTime);
+            element2.MovableComponent.Move(element1X, element1Y, fillTime);
+        }
+    }
+
+    public void PressElement(GameElement element)
+    {
+        pressedElement = element;
+    }
+    public void EnterElement(GameElement element)
+    {
+        enteredElement = element;
+    }
+
+    public void ReleaseElement()
+    {
+        if (IsAdjacent(pressedElement, enteredElement))
+        {
+            SwapElements(pressedElement, enteredElement);
+        }
     }
 }
