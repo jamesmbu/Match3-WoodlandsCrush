@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Analytics;
 using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
@@ -373,13 +374,24 @@ public class BoardManager : MonoBehaviour
             elements[element1.X, element1.Y] = element2;
             elements[element2.X, element2.Y] = element1;
 
-            // Store one of the elements X and Y position to use as reference
-            int element1X = element1.X;
-            int element1Y = element1.Y;
+            // Allow only matchable elements
+            if (GetMatch(element1, element2.X, element2.Y) != null ||
+                GetMatch(element2, element1.X, element1.Y) != null)
+            {
+                // Store one of the elements X and Y position to use as reference
+                int element1X = element1.X;
+                int element1Y = element1.Y;
 
-            // Facilitate the visual movement of the pair
-            element1.MovableComponent.Move(element2.X, element2.Y, fillTime);
-            element2.MovableComponent.Move(element1X, element1Y, fillTime);
+                // Facilitate the visual movement of the pair
+                element1.MovableComponent.Move(element2.X, element2.Y, fillTime);
+                element2.MovableComponent.Move(element1X, element1Y, fillTime);
+            }
+            else // Revert to original positions
+            {
+                elements[element1.X, element1.Y] = element1;
+                elements[element2.X, element2.Y] = element2;
+            }
+            
         }
     }
 
@@ -398,5 +410,86 @@ public class BoardManager : MonoBehaviour
         {
             SwapElements(pressedElement, enteredElement);
         }
+    }
+
+    public List<GameElement> GetMatch(GameElement element, int newX, int newY)
+    {
+        if (element.appearanceIsSet())
+        {
+            ElementAppearance.AppearanceType appearance = element.AppearanceComponent.Appearance;
+
+            // Initialize filler arrays
+            List<GameElement> horizontalElements = new List<GameElement>();
+            List<GameElement> verticalElements = new List<GameElement>();
+            List<GameElement> matchingElements = new List<GameElement>();
+
+            // First, check horizontally
+            horizontalElements.Add(element);
+
+            for (int dir = 0; dir <= 1; dir++) // directional determinant loop
+            {
+                for (int xOffset = 1; xOffset < width; xOffset++)
+                {
+                    int x;
+
+                    if (dir == 0) x = newX - xOffset; // Left
+
+                    else x = newX + xOffset; // Right
+
+
+                    if (x < 0 || x >= width) break; // Out of bounds
+
+                    // Check if the adjacent element is a match
+                    if (elements[x, newY].appearanceIsSet() &&
+                        elements[x, newY].AppearanceComponent.Appearance == appearance)
+                    {
+                        horizontalElements.Add(elements[x, newY]);
+                    }
+                    else break;
+                }
+            }
+            Debug.Log("Horizontal Elements" + horizontalElements.Count);
+            if (horizontalElements.Count >= 3)
+            {
+                matchingElements.AddRange(horizontalElements);
+            }
+            Debug.Log("Horizontal Elements" + horizontalElements.Count);
+            if (matchingElements.Count >= 3) return matchingElements;
+
+            // Secondly, check vertically (no matches found from horizontal traversal)
+            verticalElements.Add(element);
+
+            for (int dir = 0; dir <= 1; dir++) // directional determinant loop
+            {
+                for (int yOffset = 1; yOffset < width; yOffset++)
+                {
+                    int y;
+
+                    if (dir == 0) y = newY - yOffset; // Up
+
+                    else y = newY + yOffset; // Down
+
+
+                    if (y < 0 || y >= height) break; // Out of bounds
+
+                    // Check if the adjacent element is a match
+                    if (elements[newX, y].appearanceIsSet() &&
+                        elements[newX, y].AppearanceComponent.Appearance == appearance)
+                    {
+                        verticalElements.Add(elements[newX, y]);
+                    }
+                    else break;
+                }
+            }
+            Debug.Log("Vertical Elements"+verticalElements.Count);
+            if (verticalElements.Count >= 3)
+            {
+                matchingElements.AddRange(verticalElements);
+            }
+            Debug.Log("Matching Elements" + matchingElements.Count);
+            if (matchingElements.Count >= 3) return matchingElements;
+        }
+        
+        return null;
     }
 }
