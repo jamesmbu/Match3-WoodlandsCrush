@@ -436,7 +436,6 @@ public class BoardManager : MonoBehaviour
 
                     else x = newX + xOffset; // Right
 
-
                     if (x < 0 || x >= width) break; // Out of bounds
 
                     // Check if the adjacent element is a match
@@ -448,12 +447,12 @@ public class BoardManager : MonoBehaviour
                     else break;
                 }
             }
-            Debug.Log("Horizontal Elements" + horizontalElements.Count);
+
             if (horizontalElements.Count >= 3)
             {
                 matchingElements.AddRange(horizontalElements);
             }
-            Debug.Log("Horizontal Elements" + horizontalElements.Count);
+
             if (matchingElements.Count >= 3) return matchingElements;
 
             // Secondly, check vertically (no matches found from horizontal traversal)
@@ -481,12 +480,12 @@ public class BoardManager : MonoBehaviour
                     else break;
                 }
             }
-            Debug.Log("Vertical Elements"+verticalElements.Count);
+            
             if (verticalElements.Count >= 3)
             {
                 matchingElements.AddRange(verticalElements);
             }
-            Debug.Log("Matching Elements" + matchingElements.Count);
+            
             if (matchingElements.Count >= 3) return matchingElements;
         }
         
