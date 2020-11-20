@@ -45,12 +45,18 @@ public class MovableElement : MonoBehaviour
 
         Vector3 startPos = gameElement.transform.localPosition;
         Vector3 endPos = gameElement.transform.localPosition = new Vector3(toX, toY, 0);
-
-        Debug.Log("START: " + startPos);
-        Debug.Log("END: " + endPos);
+        
         for (float t = 0.0f; t <= 1.0f * time; t += Time.deltaTime)
         {
-            gameElement.transform.localPosition = Vector3.Lerp(startPos, endPos, t / time);
+            if (time > 0) // FOR LINEARLY INTERPOLATED MOVEMENTS
+            {
+                gameElement.transform.localPosition = Vector3.Lerp(startPos, endPos, t / time);
+            }
+            else // FOR INSTANT MOVEMENTS (divisions by zero cause errors)
+            {
+                gameElement.transform.localPosition = new Vector3(toX, toY, 0);
+            }
+
             yield return 0;
         }
 
