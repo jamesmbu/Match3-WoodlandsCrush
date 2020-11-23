@@ -22,7 +22,7 @@ public class ClearableElement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,12 +31,12 @@ public class ClearableElement : MonoBehaviour
         
     }
 
-    public void Clear()
+    public void Clear(float preDestructionTime)
     {
         bIsBeingCleared = true;
-        StartCoroutine(ClearCoroutine());
+        StartCoroutine(ClearCoroutine(preDestructionTime));
     }
-    private IEnumerator ClearCoroutine()
+    private IEnumerator ClearCoroutine(float preDestructionTime)
     {
         Animator animator = GetComponent<Animator>();
         if (animator)
@@ -46,7 +46,7 @@ public class ClearableElement : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else Destroy(gameObject);
+        else Destroy(gameObject,preDestructionTime);
         
     }
 }

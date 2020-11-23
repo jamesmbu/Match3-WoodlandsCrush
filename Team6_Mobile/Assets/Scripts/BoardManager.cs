@@ -606,7 +606,7 @@ public class BoardManager : MonoBehaviour
     {
         if (elements[x, y].isClearable() && !elements[x, y].ClearableComponent.IsBeingCleared)
         {
-            elements[x, y].ClearableComponent.Clear();
+            elements[x, y].ClearableComponent.Clear(fillTime);
             SpawnElement(x, y, ElementType.Empty); // Spawn an empty element in place of the removed
             return true;
         }
