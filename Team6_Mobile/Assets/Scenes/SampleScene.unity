@@ -336,7 +336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 6
   height: 6
-  fillTime: 0.1
   elementPrefabs:
   - type: 0
     prefab: {fileID: 7134460347822024974, guid: 6215be50b558688449e13209aabf52f5, type: 3}
@@ -345,6 +344,7 @@ MonoBehaviour:
   - type: 2
     prefab: {fileID: 3232941540526925476, guid: 8bb31a2cbf527a04e8257086863d71d0, type: 3}
   tilePrefab: {fileID: 46758319720463114, guid: 7ff35c5a56bfd1141801dbe1b3d64e6c, type: 3}
+  fillTime: 0.1
 --- !u!4 &553917879
 Transform:
   m_ObjectHideFlags: 0

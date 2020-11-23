@@ -16,6 +16,7 @@ public class GameElement : MonoBehaviour
 
     private ElementAppearance appearanceComponent; // handler for appearance
 
+    private ClearableElement clearableComponent;
     public int X
     {
         get { return x; }
@@ -56,11 +57,15 @@ public class GameElement : MonoBehaviour
         get { return appearanceComponent; }
     }
 
+    public ClearableElement ClearableComponent
+    {
+        get { return clearableComponent; }
+    }
     void Awake()
     {
         movableComponent = GetComponent<MovableElement>();
         appearanceComponent = GetComponent<ElementAppearance>();
-
+        clearableComponent = GetComponent<ClearableElement>();
     }
     // Start is called before the first frame update
     void Start()
@@ -99,6 +104,11 @@ public class GameElement : MonoBehaviour
     public bool isMovable()
     {
         return movableComponent != null;
+    }
+
+    public bool isClearable()
+    {
+        return clearableComponent != null;
     }
     public bool appearanceIsSet()
     {

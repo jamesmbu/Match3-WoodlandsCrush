@@ -54,6 +54,7 @@ public class BoardManager : MonoBehaviour
     private bool inverse = false;
     private Vector3 _position;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -135,13 +136,23 @@ public class BoardManager : MonoBehaviour
 
     public IEnumerator Fill()
     {
+        bool bNeedsRefill = true;
         // Debug.Log("Starts here (IENUM)");
-        while (FillStep())
+        while (bNeedsRefill)
         {
-            /* Function is called until it returns false */
-            inverse = !inverse;
             yield return new WaitForSeconds(fillTime);
+            while (FillStep())
+            {
+                
+                /* Function is called until it returns false */
+                inverse = !inverse;
+                yield return new WaitForSeconds(fillTime);
+            }
+            Debug.Log("IN");
+            bNeedsRefill = ClearAllValidMatches();
+            Debug.Log("OUT");
         }
+        
 
     }
 
@@ -385,6 +396,10 @@ public class BoardManager : MonoBehaviour
                 // Facilitate the visual movement of the pair
                 element1.MovableComponent.Move(element2.X, element2.Y, fillTime);
                 element2.MovableComponent.Move(element1X, element1Y, fillTime);
+
+                // Clearing elements
+                ClearAllValidMatches();
+                StartCoroutine(Fill());
             }
             else // Revert to original positions
             {
@@ -451,16 +466,54 @@ public class BoardManager : MonoBehaviour
             if (horizontalElements.Count >= 3)
             {
                 matchingElements.AddRange(horizontalElements);
+                //matchingElements.AddRange(horizontalElements);
+            }
+
+            // Traverse each element vertically if a match is found (L and T match checks)
+            if (horizontalElements.Count >= 3)
+            {
+                for (int i = 0; i < horizontalElements.Count; i++)
+                {
+                    for (int dir = 0; dir <= 1; dir++)
+                    {
+                        for (int yOffset = 1; yOffset < height; yOffset++)
+                        {
+                            int y;
+
+                            if (dir == 0) y = newY - yOffset; // Up
+                            else y = newY + yOffset; // Down
+
+                            if (y < 0 || y >= height) break; // Out of bounds 
+
+                            if (elements[horizontalElements[i].X, y].appearanceIsSet() &&
+                                elements[horizontalElements[i].X, y].AppearanceComponent.Appearance == appearance)
+                            {
+                                verticalElements.Add(elements[horizontalElements[i].X, y]);
+                            }
+                            else break;
+                        }
+                    }
+                    if (verticalElements.Count < 2) verticalElements.Clear(); // clear the way for the next iteration
+                    else
+                    {
+                        matchingElements.AddRange(horizontalElements);
+                        break;
+                    }
+                }
             }
 
             if (matchingElements.Count >= 3) return matchingElements;
+            
+            horizontalElements.Clear();
+            verticalElements.Clear();
+            matchingElements.Clear();
 
             // Secondly, check vertically (no matches found from horizontal traversal)
             verticalElements.Add(element);
 
             for (int dir = 0; dir <= 1; dir++) // directional determinant loop
             {
-                for (int yOffset = 1; yOffset < width; yOffset++)
+                for (int yOffset = 1; yOffset < height; yOffset++)
                 {
                     int y;
 
@@ -483,12 +536,91 @@ public class BoardManager : MonoBehaviour
             
             if (verticalElements.Count >= 3)
             {
+                //matchingElements.AddRange(verticalElements);
                 matchingElements.AddRange(verticalElements);
             }
-            
-            if (matchingElements.Count >= 3) return matchingElements;
+            /*
+            // Traverse each element horizontally if a match is found (L and T match checks)
+            if (verticalElements.Count >= 3)
+            {
+                for (int i = 0; i < verticalElements.Count; i++)
+                {
+                    for (int dir = 0; dir <= 1; dir++)
+                    {
+                        for (int xOffset = 1; xOffset < height; xOffset++)
+                        {
+                            int x;
+
+                            if (dir == 0) x = newX - xOffset; // Left
+                            else x = newX + xOffset; // Right
+
+                            if (x < 0 || x >= height) break; // Out of bounds 
+
+                            if (elements[x, verticalElements[i].Y].appearanceIsSet() &&
+                                elements[x, verticalElements[i].Y].AppearanceComponent.Appearance == appearance)
+                            {
+                                verticalElements.Add(elements[x, verticalElements[i].Y]);
+                            }
+                            else break;
+                        }
+                    }
+                    if (horizontalElements.Count < 2) horizontalElements.Clear(); // clear the way for the next iteration
+                    else
+                    {
+                        //matchingElements.AddRange(horizontalElements);
+                        for (int j = 0; j < horizontalElements.Count; j++)
+                        {
+                            matchingElements.Add(horizontalElements[j]);
+                        }
+                        break;
+                    }
+                }
+            }
+            */
+            if (matchingElements.Count >= 3)
+            {
+                return matchingElements;
+            }
         }
-        
+
         return null;
+    }
+
+    public bool ClearAllValidMatches()
+    {
+        bool bNeedsRefill = false;
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                if (elements[x, y].isClearable())
+                {
+                    Debug.Log("IN 2");
+                    List<GameElement> match = GetMatch(elements[x, y], x, y);
+                    Debug.Log("OUT 2");
+                    if (match != null)
+                    {
+                        for (int i = 0; i < match.Count; i++)
+                        {
+                            if (ClearElement(match[i].X, match[i].Y)) bNeedsRefill = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return bNeedsRefill;
+    }
+
+    public bool ClearElement(int x, int y)
+    {
+        if (elements[x, y].isClearable() && !elements[x, y].ClearableComponent.IsBeingCleared)
+        {
+            elements[x, y].ClearableComponent.Clear();
+            SpawnElement(x, y, ElementType.Empty); // Spawn an empty element in place of the removed
+            return true;
+        }
+        return false;
     }
 }
