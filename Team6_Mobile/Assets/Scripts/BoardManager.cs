@@ -148,9 +148,7 @@ public class BoardManager : MonoBehaviour
                 inverse = !inverse;
                 yield return new WaitForSeconds(fillTime);
             }
-            Debug.Log("IN");
             bNeedsRefill = ClearAllValidMatches();
-            Debug.Log("OUT");
         }
         
 
@@ -466,7 +464,6 @@ public class BoardManager : MonoBehaviour
             if (horizontalElements.Count >= 3)
             {
                 matchingElements.AddRange(horizontalElements);
-                //matchingElements.AddRange(horizontalElements);
             }
 
             // Traverse each element vertically if a match is found (L and T match checks)
@@ -496,7 +493,7 @@ public class BoardManager : MonoBehaviour
                     if (verticalElements.Count < 2) verticalElements.Clear(); // clear the way for the next iteration
                     else
                     {
-                        matchingElements.AddRange(horizontalElements);
+                        matchingElements.AddRange(verticalElements);
                         break;
                     }
                 }
@@ -506,7 +503,6 @@ public class BoardManager : MonoBehaviour
             
             horizontalElements.Clear();
             verticalElements.Clear();
-            matchingElements.Clear();
 
             // Secondly, check vertically (no matches found from horizontal traversal)
             verticalElements.Add(element);
@@ -536,10 +532,9 @@ public class BoardManager : MonoBehaviour
             
             if (verticalElements.Count >= 3)
             {
-                //matchingElements.AddRange(verticalElements);
                 matchingElements.AddRange(verticalElements);
             }
-            /*
+            
             // Traverse each element horizontally if a match is found (L and T match checks)
             if (verticalElements.Count >= 3)
             {
@@ -559,7 +554,7 @@ public class BoardManager : MonoBehaviour
                             if (elements[x, verticalElements[i].Y].appearanceIsSet() &&
                                 elements[x, verticalElements[i].Y].AppearanceComponent.Appearance == appearance)
                             {
-                                verticalElements.Add(elements[x, verticalElements[i].Y]);
+                                horizontalElements.Add(elements[x, verticalElements[i].Y]);
                             }
                             else break;
                         }
@@ -567,16 +562,12 @@ public class BoardManager : MonoBehaviour
                     if (horizontalElements.Count < 2) horizontalElements.Clear(); // clear the way for the next iteration
                     else
                     {
-                        //matchingElements.AddRange(horizontalElements);
-                        for (int j = 0; j < horizontalElements.Count; j++)
-                        {
-                            matchingElements.Add(horizontalElements[j]);
-                        }
+                        matchingElements.AddRange(horizontalElements);
                         break;
                     }
                 }
             }
-            */
+            
             if (matchingElements.Count >= 3)
             {
                 return matchingElements;
@@ -596,9 +587,7 @@ public class BoardManager : MonoBehaviour
             {
                 if (elements[x, y].isClearable())
                 {
-                    Debug.Log("IN 2");
                     List<GameElement> match = GetMatch(elements[x, y], x, y);
-                    Debug.Log("OUT 2");
                     if (match != null)
                     {
                         for (int i = 0; i < match.Count; i++)
