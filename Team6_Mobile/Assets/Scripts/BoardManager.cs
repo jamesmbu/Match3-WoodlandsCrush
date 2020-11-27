@@ -131,7 +131,7 @@ public class BoardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Touch myTouch = Input.GetTouch(0);
+        //Touch myTouch = Input.GetTouch(0);
     }
 
     public IEnumerator Fill()
