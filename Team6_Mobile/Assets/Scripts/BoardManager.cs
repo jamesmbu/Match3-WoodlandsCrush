@@ -608,8 +608,31 @@ public class BoardManager : MonoBehaviour
         {
             elements[x, y].ClearableComponent.Clear(fillTime);
             SpawnElement(x, y, ElementType.Empty); // Spawn an empty element in place of the removed
+            ClearObstacles(x, y);
             return true;
         }
         return false;
+    }
+
+    public void ClearObstacles(int x, int y) // checks adjacent elements to identify obstacles
+    {
+        for (int adjX = x - 1; adjX <= x + 1; adjX++)
+        {
+            if (adjX != x && adjX >= 0 && adjX < width) // only for adjacent elements
+            {
+                if (elements[adjX, y].Type == ElementType.Obstacle &&
+                    elements[adjX, y].isClearable()) // if next to a clearable obstacle
+                {
+                    elements[adjX, y].health -= 1;
+                    if (elements[adjX, y].health <= 0)
+                    {
+                        elements[adjX, y].ClearableComponent.Clear(fillTime); // removal of obstacle
+                        SpawnElement(adjX, y, ElementType.Empty); // replace with empty element
+                    }
+                    
+                }
+                
+            }
+        }
     }
 }

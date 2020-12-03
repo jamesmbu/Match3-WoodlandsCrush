@@ -8,6 +8,9 @@ public class GameElement : MonoBehaviour
 
     private int y;
 
+    [Range(0,4)]
+    public int health;
+
     private BoardManager.ElementType type;
 
     private BoardManager boardManager;
@@ -39,6 +42,11 @@ public class GameElement : MonoBehaviour
             }
         }
     }
+
+    /*public int Health
+    {
+        get { return health; }
+    }*/
 
     public BoardManager.ElementType Type
     {
