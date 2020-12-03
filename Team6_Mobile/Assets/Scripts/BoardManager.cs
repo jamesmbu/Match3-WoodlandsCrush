@@ -16,6 +16,8 @@ public class BoardManager : MonoBehaviour
         Obstacle,
         Count,
     }
+
+    private bool levelGenerated = false;
     // Grid dimensions
     public int width, height;
 
@@ -131,7 +133,6 @@ public class BoardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public IEnumerator Fill()
@@ -150,7 +151,8 @@ public class BoardManager : MonoBehaviour
             }
             bNeedsRefill = ClearAllValidMatches();
         }
-        
+
+        levelGenerated = true; // marks the point when the board has been completely filled. Now, score will start to be tracked, obstacles can be cleared
 
     }
 
@@ -616,6 +618,7 @@ public class BoardManager : MonoBehaviour
 
     public void ClearObstacles(int x, int y) // checks adjacent elements to identify obstacles
     {
+        if (!levelGenerated) return; // waits until the level has been fully generated. Otherwise, obstacles will be potentially cleared without user effort.
         for (int adjX = x - 1; adjX <= x + 1; adjX++)
         {
             if (adjX != x && adjX >= 0 && adjX < width) // only for adjacent elements
