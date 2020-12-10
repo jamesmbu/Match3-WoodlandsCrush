@@ -573,13 +573,13 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'DEMO OF MECHANICS
 
-    match in any direction
+    - match in any direction
 
-    create 2 matches around
-    the logs to clear them (demo of other element type)
+    - create 2 matches
+    around the logs to clear them (demo of other element type)
 
-    level structure coming
-    soon'
+    level structure
+    coming soon'
 --- !u!222 &1208492570
 CanvasRenderer:
   m_ObjectHideFlags: 0
