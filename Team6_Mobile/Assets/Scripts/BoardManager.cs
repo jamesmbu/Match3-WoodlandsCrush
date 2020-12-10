@@ -636,6 +636,26 @@ public class BoardManager : MonoBehaviour
                 }
                 
             }
+
+        }
+        for (int adjY = y - 1; adjY <= y + 1; adjY++)
+        {
+            if (adjY != y && adjY >= 0 && adjY < height) // only for adjacent elements
+            {
+                if (elements[x, adjY].Type == ElementType.Obstacle &&
+                    elements[x, adjY].isClearable()) // if next to a clearable obstacle
+                {
+                    elements[x, adjY].health -= 1;
+                    if (elements[x, adjY].health <= 0)
+                    {
+                        elements[x, adjY].ClearableComponent.Clear(fillTime); // removal of obstacle
+                        SpawnElement(x, adjY, ElementType.Empty); // replace with empty element
+                    }
+
+                }
+
+            }
+
         }
     }
 }
