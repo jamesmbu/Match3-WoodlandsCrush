@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/WorldMapScene.unity
     guid: 1f31ac5e0c3960743a3606ec4b9383d4
   - enabled: 1
+    path: Assets/Scenes/MainLevelScene 1.unity
+    guid: 8ecaf4062cfd4244f85d17b6bbbb1f0e
+  - enabled: 1
     path: Assets/Scenes/L1-5/level 1.unity
     guid: 9051dde227a3ead4680a36d57e2bf956
   - enabled: 1
