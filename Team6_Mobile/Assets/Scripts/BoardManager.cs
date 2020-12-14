@@ -394,7 +394,7 @@ public class BoardManager : MonoBehaviour
             elements[element1.X, element1.Y] = element2;
             elements[element2.X, element2.Y] = element1;
 
-            // Allow only matchable elements
+            // Allow only matchable elements; check if they 
             if (GetMatch(element1, element2.X, element2.Y) != null ||
                 GetMatch(element2, element1.X, element1.Y) != null)
             {
@@ -510,11 +510,14 @@ public class BoardManager : MonoBehaviour
                 }
             }
 
-            if (matchingElements.Count >= 3) return matchingElements;
+            if (matchingElements.Count >= 3)
+            {
+                return matchingElements;
+            }
             
             horizontalElements.Clear();
             verticalElements.Clear();
-
+            matchingElements.Clear();
             // Secondly, check vertically (no matches found from horizontal traversal)
             verticalElements.Add(element);
 
@@ -598,12 +601,16 @@ public class BoardManager : MonoBehaviour
             {
                 if (elements[x, y].isClearable())
                 {
-                    List<GameElement> match = GetMatch(elements[x, y], x, y);
-                    if (match != null)
+                    List<GameElement> match = GetMatch(elements[x, y], x, y); // populate list with matched elements
+                    
+
+                    if (match != null) // if not empty (then matches were found)
                     {
+                        Debug.Log("Matched: " + match.Count);
+                        progressionTracker.UpdateProgress(match.Count);
                         for (int i = 0; i < match.Count; i++)
                         {
-                            if (ClearElement(match[i].X, match[i].Y)) bNeedsRefill = true;
+                            if (ClearElement(match[i].X, match[i].Y)) bNeedsRefill = true; // clear the element- if it worked, mark for refill
                         }
                     }
                 }
@@ -620,7 +627,7 @@ public class BoardManager : MonoBehaviour
             elements[x, y].ClearableComponent.Clear(fillTime);
             SpawnElement(x, y, ElementType.Empty); // Spawn an empty element in place of the removed
             ClearObstacles(x, y);
-            progressionTracker.UpdateProgress(1);
+            //if (levelGenerated) progressionTracker.UpdateProgress(1);
             return true;
         }
         return false;

@@ -336,8 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84589eb03949871429ad41e8e85370ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 6
-  height: 6
+  width: 8
+  height: 8
   elementPrefabs:
   - type: 0
     prefab: {fileID: 7134460347822024974, guid: 6215be50b558688449e13209aabf52f5, type: 3}
