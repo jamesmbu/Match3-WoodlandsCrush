@@ -21,6 +21,6 @@ public class selector : MonoBehaviour
 
     void OnMouseDown()
     {
-        SceneManager.LoadScene("MainLevelScene");
+        SceneManager.LoadScene("level " + TargetLevel);
     }
 }
