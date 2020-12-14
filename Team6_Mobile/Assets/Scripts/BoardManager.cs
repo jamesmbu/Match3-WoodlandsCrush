@@ -16,7 +16,11 @@ public class BoardManager : MonoBehaviour
         Obstacle,
         Count,
     }
+    // Reference to the level manager
+    private GameObject levelManagerRef;
+    private ProgressionTracker progressionTracker;
 
+    // Tracker for completion of initial generation
     private bool levelGenerated = false;
     // Grid dimensions
     public int width, height;
@@ -56,6 +60,11 @@ public class BoardManager : MonoBehaviour
     private bool inverse = false;
     private Vector3 _position;
 
+    void Awake()
+    {
+        levelManagerRef = GameObject.Find("LevelManager");
+        progressionTracker = levelManagerRef.gameObject.GetComponent<ProgressionTracker>();
+    }
 
     // Start is called before the first frame update
     void Start()
