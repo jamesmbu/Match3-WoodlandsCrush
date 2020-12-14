@@ -620,6 +620,7 @@ public class BoardManager : MonoBehaviour
             elements[x, y].ClearableComponent.Clear(fillTime);
             SpawnElement(x, y, ElementType.Empty); // Spawn an empty element in place of the removed
             ClearObstacles(x, y);
+            progressionTracker.UpdateProgress(1);
             return true;
         }
         return false;

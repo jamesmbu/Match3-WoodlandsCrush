@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ProgressionTracker : MonoBehaviour
 {
+    
+    [SerializeField]
+    private int Score = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +19,8 @@ public class ProgressionTracker : MonoBehaviour
         
     }
 
-    void UpdateProgress()
+    public void UpdateProgress(int elementsClearCount)
     {
-
+        Score += elementsClearCount;
     }
 }
