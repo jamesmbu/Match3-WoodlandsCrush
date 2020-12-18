@@ -89,6 +89,7 @@ public class GameElement : MonoBehaviour
 
     void OnMouseEnter()
     {
+        
         boardManager.EnterElement(this);
     }
 

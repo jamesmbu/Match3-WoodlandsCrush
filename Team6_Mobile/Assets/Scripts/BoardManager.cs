@@ -607,7 +607,7 @@ public class BoardManager : MonoBehaviour
                     if (match != null) // if not empty (then matches were found)
                     {
                         Debug.Log("Matched: " + match.Count);
-                        progressionTracker.UpdateProgress(match.Count);
+                        if (levelGenerated) progressionTracker.UpdateProgress(match.Count);
                         for (int i = 0; i < match.Count; i++)
                         {
                             if (ClearElement(match[i].X, match[i].Y)) bNeedsRefill = true; // clear the element- if it worked, mark for refill
