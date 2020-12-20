@@ -441,7 +441,7 @@ public class BoardManager : MonoBehaviour
         if (element.appearanceIsSet())
         {
             ElementAppearance.AppearanceType appearance = element.AppearanceComponent.Appearance;
-
+            
             // Initialize filler arrays
             List<GameElement> horizontalElements = new List<GameElement>();
             List<GameElement> verticalElements = new List<GameElement>();
@@ -607,7 +607,7 @@ public class BoardManager : MonoBehaviour
                     if (match != null) // if not empty (then matches were found)
                     {
                         Debug.Log("Matched: " + match.Count);
-                        if (levelGenerated) progressionTracker.UpdateProgress(match.Count);
+                        if (levelGenerated) progressionTracker.UpdateProgress(match); //increment score if map is loaded properly
                         for (int i = 0; i < match.Count; i++)
                         {
                             if (ClearElement(match[i].X, match[i].Y)) bNeedsRefill = true; // clear the element- if it worked, mark for refill
