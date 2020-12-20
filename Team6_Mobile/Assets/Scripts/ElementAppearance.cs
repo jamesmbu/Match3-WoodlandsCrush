@@ -12,7 +12,7 @@ public class ElementAppearance : MonoBehaviour
         Deer,
         Count,
     }
-
+    
     [System.Serializable]
     public struct SpriteAppearance
     {
