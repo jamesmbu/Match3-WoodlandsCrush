@@ -14,6 +14,7 @@ public class ProgressionTracker : MonoBehaviour
         public int WinRequirement;
         public bool WinReached;
         public Text DisplayText;
+        public Image DisplayImage;
     }
 
     public WinConditions[] LevelWinConditions;
@@ -67,12 +68,9 @@ public class ProgressionTracker : MonoBehaviour
         {
             if (LevelWinConditions[i].DisplayText && elementTypeCount.ContainsKey(LevelWinConditions[i].type))
             {
-                LevelWinConditions[i].DisplayText.text =
-                    elementTypeCount[LevelWinConditions[i].type].ToString() /* + LevelWinConditions[i].WinRequirement*/;
+                LevelWinConditions[i].DisplayText.text = 
+                    elementTypeCount[LevelWinConditions[i].type].ToString() + "/" + LevelWinConditions[i].WinRequirement.ToString();
             }
-
-
-
         }
 
         /* Determine distance from win condition(s) */
