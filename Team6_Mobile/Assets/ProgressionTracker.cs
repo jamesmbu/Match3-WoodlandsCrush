@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProgressionTracker : MonoBehaviour
 {
+    // Public struct for setting conditions from the editor
     [System.Serializable]
     public struct WinConditions
     {
         public ElementAppearance.AppearanceType type;
         public int WinRequirement;
+        public bool WinReached;
+        public Text DisplayText;
     }
 
     public WinConditions[] LevelWinConditions;
-
+    private int WinConditionsCount, ConditionsMet;
+    
     [SerializeField]
     private int Score = 0;
 
@@ -20,7 +26,15 @@ public class ProgressionTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        /* determine how many win conditions there are */
+        for (int i = 0; i < LevelWinConditions.Length; i++)
+        {
+            // if there is a win condition set for the element
+            if (LevelWinConditions[i].WinRequirement > 0) // 0 means win isn't dependent on the specific element, only look to those above 0
+            {
+                WinConditionsCount++;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -45,15 +59,38 @@ public class ProgressionTracker : MonoBehaviour
                 elementTypeCount[appearanceNameKey]+=1; // increment the counter for this animal
                 //Debug.Log(""+appearanceNameKey+ " "+ elementTypeCount[appearanceNameKey]); // out latest element count
             }
+            
+            
         }
+
+        for (int i = 0; i < LevelWinConditions.Length; i++)
+        {
+            if (LevelWinConditions[i].DisplayText && elementTypeCount.ContainsKey(LevelWinConditions[i].type))
+            {
+                LevelWinConditions[i].DisplayText.text =
+                    elementTypeCount[LevelWinConditions[i].type].ToString() /* + LevelWinConditions[i].WinRequirement*/;
+            }
+
+
+
+        }
+
         /* Determine distance from win condition(s) */
         for (int i = 0; i < LevelWinConditions.Length; i++)
         {
+            // if there is a win condition set for the element
             if (LevelWinConditions[i].WinRequirement > 0) // 0 means win isn't dependent on the specific element, only look to those above 0
             {
+                
                 if (elementTypeCount.ContainsKey(LevelWinConditions[i].type))
                 {
-                    // access the key, then do other stuff
+                    // if the current count of the element is equivalent or exceeds the win requirement...
+                    if (elementTypeCount[LevelWinConditions[i].type] >= LevelWinConditions[i].WinRequirement
+                    && !LevelWinConditions[i].WinReached)// ... and if the condition hasn't already been met
+                    {
+                        LevelWinConditions[i].WinReached = true;
+                        ConditionsMet++;
+                    }
                 }
             }
         }
