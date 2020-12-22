@@ -35,6 +35,11 @@ public class ProgressionTracker : MonoBehaviour
             {
                 WinConditionsCount++;
             }
+            if (LevelWinConditions[i].DisplayText)
+            {
+                LevelWinConditions[i].DisplayText.text =
+                    "0" + "/" + LevelWinConditions[i].WinRequirement.ToString();
+            }
         }
     }
 
