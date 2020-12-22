@@ -127,11 +127,11 @@ public class BoardManager : MonoBehaviour
         }
 
         // NOTE: Make obstacle spawning designer friendly! TBD
-        Destroy(elements[3, 3].gameObject);
+        /*Destroy(elements[3, 3].gameObject);
         SpawnElement(3, 3, ElementType.Obstacle);
 
         Destroy(elements[4, 3].gameObject);
-        SpawnElement(4, 3, ElementType.Obstacle);
+        SpawnElement(4, 3, ElementType.Obstacle);*/
 
         AlignBoard();
         

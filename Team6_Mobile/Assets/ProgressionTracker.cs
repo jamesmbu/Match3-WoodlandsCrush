@@ -35,6 +35,7 @@ public class ProgressionTracker : MonoBehaviour
             {
                 WinConditionsCount++;
             }
+            /* set initial text displays to show the total required */
             if (LevelWinConditions[i].DisplayText)
             {
                 LevelWinConditions[i].DisplayText.text =
@@ -68,11 +69,16 @@ public class ProgressionTracker : MonoBehaviour
             
             
         }
-
+        
+        /* Display text */
         for (int i = 0; i < LevelWinConditions.Length; i++)
         {
             if (LevelWinConditions[i].DisplayText && elementTypeCount.ContainsKey(LevelWinConditions[i].type))
             {
+                if (elementTypeCount[LevelWinConditions[i].type] >= LevelWinConditions[i].WinRequirement)
+                {
+                    LevelWinConditions[i].DisplayText.color = Color.green;
+                }
                 LevelWinConditions[i].DisplayText.text = 
                     elementTypeCount[LevelWinConditions[i].type].ToString() + "/" + LevelWinConditions[i].WinRequirement.ToString();
             }
@@ -93,6 +99,10 @@ public class ProgressionTracker : MonoBehaviour
                     {
                         LevelWinConditions[i].WinReached = true;
                         ConditionsMet++;
+                        if (ConditionsMet >= WinConditionsCount)
+                        {
+
+                        }
                     }
                 }
             }
