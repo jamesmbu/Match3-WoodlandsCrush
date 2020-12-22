@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/L1-5/level.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/WorldMapScene.unity
     guid: 1f31ac5e0c3960743a3606ec4b9383d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainLevelScene 1.unity
     guid: 8ecaf4062cfd4244f85d17b6bbbb1f0e
   - enabled: 1
@@ -19,14 +19,41 @@ EditorBuildSettings:
     guid: 9051dde227a3ead4680a36d57e2bf956
   - enabled: 1
     path: Assets/Scenes/L1-5/level 2.unity
-    guid: 1b1bba2a99a69a742b39bebbcdabba06
+    guid: 1171b2dd4775c524395ccb83556ca5eb
   - enabled: 1
     path: Assets/Scenes/L1-5/level 3.unity
-    guid: ae6abb499c2e52f44a84522adffb3c7b
+    guid: 6ce17b8e56aec6142ab440ab124a189a
   - enabled: 1
     path: Assets/Scenes/L1-5/level 4.unity
-    guid: 496f53e4b21860f4c839221911d79ddd
+    guid: 93ef7f9cb164cca498bfcdbf47522e1e
   - enabled: 1
     path: Assets/Scenes/L1-5/level 5.unity
-    guid: 6787bb18bcc70984e8a73d415244e71c
+    guid: e3a6366cbf033e649bf78b78c6814284
+  - enabled: 1
+    path: Assets/Scenes/L30-35/level 30.unity
+    guid: 08baeaed94fc5e448a4d93f92e0fa122
+  - enabled: 1
+    path: Assets/Scenes/L30-35/level 31.unity
+    guid: e5f9b2a33d9fe8845be9a971f3fc5a64
+  - enabled: 1
+    path: Assets/Scenes/L30-35/level 32.unity
+    guid: a17ad2fbdbe8ed94a82fa75b57e6882a
+  - enabled: 1
+    path: Assets/Scenes/L30-35/level 33.unity
+    guid: d9b93ccfc40571f4796f1f1ce6c857b0
+  - enabled: 1
+    path: Assets/Scenes/L30-35/level 34.unity
+    guid: ca27a5fb753dae643b03a9a296203e60
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
