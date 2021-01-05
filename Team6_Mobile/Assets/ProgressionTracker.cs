@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressionTracker : MonoBehaviour
 {
+    public GameObject Canvas;
+    public GameObject WinPanel;
     // Public struct for setting conditions from the editor
     [System.Serializable]
     public struct WinConditions
@@ -17,6 +18,8 @@ public class ProgressionTracker : MonoBehaviour
         public Image DisplayImage;
     }
 
+
+
     public WinConditions[] LevelWinConditions;
     private int WinConditionsCount, ConditionsMet;
     
@@ -25,6 +28,8 @@ public class ProgressionTracker : MonoBehaviour
 
     public Dictionary<ElementAppearance.AppearanceType, int> elementTypeCount = new Dictionary<ElementAppearance.AppearanceType, int>();
     // Start is called before the first frame update
+
+    public 
     void Start()
     {
         /* determine how many win conditions there are */
@@ -66,8 +71,6 @@ public class ProgressionTracker : MonoBehaviour
                 elementTypeCount[appearanceNameKey]+=1; // increment the counter for this animal
                 //Debug.Log(""+appearanceNameKey+ " "+ elementTypeCount[appearanceNameKey]); // out latest element count
             }
-            
-            
         }
         
         /* Display text */
@@ -77,7 +80,7 @@ public class ProgressionTracker : MonoBehaviour
             {
                 if (elementTypeCount[LevelWinConditions[i].type] >= LevelWinConditions[i].WinRequirement)
                 {
-                    LevelWinConditions[i].DisplayText.color = Color.green;
+                    LevelWinConditions[i].DisplayText.color = Color.green; // green text when goal is met
                 }
                 LevelWinConditions[i].DisplayText.text = 
                     elementTypeCount[LevelWinConditions[i].type].ToString() + "/" + LevelWinConditions[i].WinRequirement.ToString();
@@ -101,15 +104,22 @@ public class ProgressionTracker : MonoBehaviour
                         ConditionsMet++;
                         if (ConditionsMet >= WinConditionsCount)
                         {
-
+                            Win();
                         }
                     }
                 }
             }
         }
 
-
         /* Increment score */
         Score += matchedElements.Count;
     }
+
+    void Win()
+    {
+        // enable the end-of-level UI
+        WinPanel.SetActive(true);
+        Canvas.GetComponent<Canvas>().sortingOrder = 5;
+    }
+    
 }

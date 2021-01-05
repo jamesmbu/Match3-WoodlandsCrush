@@ -3,46 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseScript : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-
-    public GameObject PauseMenuUI;
+    public GameObject WinPanelUI;
 
     public GameObject Canvas;
-
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
     void OnMouseUp()
     {
-        Debug.Log("Pause");
-        if (!GameIsPaused) Pause();
+        Debug.Log("main menu");
     }
-    public void Resume()
+    // Update is called once per frame
+    void Update()
     {
-        Canvas.GetComponent<Canvas>().sortingOrder = -4;
-        PauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
+        
     }
 
-    void Pause()
+    public void Open()
     {
         Canvas.GetComponent<Canvas>().sortingOrder = 5;
-        PauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        WinPanelUI.SetActive(true);
     }
-
     public void LoadMenu()
     {
         Time.timeScale = 1f;
         Canvas.GetComponent<Canvas>().sortingOrder = -4;
-        GameIsPaused = false;
         SceneManager.LoadScene("WorldMapScene");
+    }
+
+    public void ReplayLevel()
+    {
+        Time.timeScale = 1f;
+        Scene scene = SceneManager.GetActiveScene();
+        Canvas.GetComponent<Canvas>().sortingOrder = 4;
+        SceneManager.LoadScene(scene.name);
     }
 }
