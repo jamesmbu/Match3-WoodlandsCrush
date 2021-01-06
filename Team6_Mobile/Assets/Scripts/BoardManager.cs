@@ -35,7 +35,12 @@ public class BoardManager : MonoBehaviour
 
     // Make an array of the struct for the editor
     public ElementPrefab[] elementPrefabs;
-
+    [System.Serializable]
+    public struct ObstacleInsert
+    {
+        public int X, Y;
+    }
+    public ObstacleInsert[] ObstacleInserts;
     // Tile prefab
     public GameObject tilePrefab;
 
@@ -126,6 +131,15 @@ public class BoardManager : MonoBehaviour
             }
         }
 
+        Debug.Log(ObstacleInserts.Length);
+        if (ObstacleInserts.Length > 0)
+        {
+            for (int i = 0; i < ObstacleInserts.Length; i++)
+            {
+                Destroy(elements[ObstacleInserts[i].X, ObstacleInserts[i].Y].gameObject);
+                SpawnElement(ObstacleInserts[i].X, ObstacleInserts[i].Y, ElementType.Obstacle);
+            }
+        }
         // NOTE: Make obstacle spawning designer friendly! TBD
         /*Destroy(elements[3, 3].gameObject);
         SpawnElement(3, 3, ElementType.Obstacle);
