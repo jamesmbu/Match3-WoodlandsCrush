@@ -44,6 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f608ddb308fd2964da40151d7a97d1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 0}
+  WinPanel: {fileID: 0}
+  LosePanel: {fileID: 0}
+  Turns: 5
+  LevelWinConditions: []
+  Score: 0
 --- !u!114 &2549075100160159715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,3 +62,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c120a8c5c670be4aa964fcc9e5b3aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PauseImageButton: {fileID: 0}

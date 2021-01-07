@@ -7,6 +7,9 @@ public class ProgressionTracker : MonoBehaviour
 {
     public GameObject Canvas;
     public GameObject WinPanel;
+    public GameObject LosePanel;
+
+    public int Turns;
     // Public struct for setting conditions from the editor
     [System.Serializable]
     public struct WinConditions
@@ -120,6 +123,24 @@ public class ProgressionTracker : MonoBehaviour
         // enable the end-of-level UI
         WinPanel.SetActive(true);
         Canvas.GetComponent<Canvas>().sortingOrder = 5;
+    }
+
+    void Lose()
+    {
+        // enable the end-of-level UI
+        LosePanel.SetActive(true);
+        Canvas.GetComponent<Canvas>().sortingOrder = 5;
+    }
+    /* Notes that a turn has been made */
+    public void UseTurn()
+    {
+        Turns--;
+        if (Turns <= 0)
+        {
+            Lose();
+        }
+
+        Debug.Log("Turns remaining: " + Turns);
     }
     
 }

@@ -416,6 +416,7 @@ public class BoardManager : MonoBehaviour
                 // Clearing elements
                 ClearAllValidMatches();
                 StartCoroutine(Fill());
+                progressionTracker.UseTurn();
             }
             else // Revert to original positions
             {
