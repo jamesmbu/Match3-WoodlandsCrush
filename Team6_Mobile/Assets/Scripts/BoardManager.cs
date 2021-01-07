@@ -131,7 +131,6 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        Debug.Log(ObstacleInserts.Length);
         if (ObstacleInserts.Length > 0)
         {
             for (int i = 0; i < ObstacleInserts.Length; i++)
@@ -140,12 +139,6 @@ public class BoardManager : MonoBehaviour
                 SpawnElement(ObstacleInserts[i].X, ObstacleInserts[i].Y, ElementType.Obstacle);
             }
         }
-        // NOTE: Make obstacle spawning designer friendly! TBD
-        /*Destroy(elements[3, 3].gameObject);
-        SpawnElement(3, 3, ElementType.Obstacle);
-
-        Destroy(elements[4, 3].gameObject);
-        SpawnElement(4, 3, ElementType.Obstacle);*/
 
         AlignBoard();
         

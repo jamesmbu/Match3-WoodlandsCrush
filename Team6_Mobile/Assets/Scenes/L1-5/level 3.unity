@@ -633,6 +633,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[0].X
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[0].Y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[1].X
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[1].Y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097693, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
