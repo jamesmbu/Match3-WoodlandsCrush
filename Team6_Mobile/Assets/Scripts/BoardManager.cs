@@ -194,7 +194,7 @@ public class BoardManager : MonoBehaviour
                     if (elementBelow.Type == ElementType.Empty)
                     {
                         Destroy(elementBelow.gameObject);
-                        element.MovableComponent.Move(x, y - 1, fillTime); 
+                        element.MovableComponent.Move(x, y - 1, fillTime,false); 
                         elements[x, y - 1] = element; // bring the element to its new space below
                         SpawnElement(x, y, ElementType.Empty); // spawn empty element where the element just moved from
                         bMovedPiece = true;
@@ -239,7 +239,7 @@ public class BoardManager : MonoBehaviour
                             if (!bHasPieceAbove)
                             {   // then diagonal movement commences
                                 Destroy(diagonalPiece.gameObject);
-                                element.MovableComponent.Move(diagX, y - 1, fillTime);
+                                element.MovableComponent.Move(diagX, y - 1, fillTime,false);
                                 elements[diagX, y - 1] = element;
                                 SpawnElement(x, y, ElementType.Empty);
                                 bMovedPiece = true;
@@ -265,11 +265,11 @@ public class BoardManager : MonoBehaviour
                 
                 if (newElement.GetComponent<MovableElement>())
                 {
-                    newElement.GetComponent<MovableElement>().Move(x,topRowIndex+1,0);
+                    newElement.GetComponent<MovableElement>().Move(x,topRowIndex+1,0,false);
                 }
                 elements[x, topRowIndex] = newElement.GetComponent<GameElement>();
                 elements[x, topRowIndex].Init(x, -1, this, ElementType.Normal);
-                elements[x, topRowIndex].MovableComponent.Move(x, topRowIndex, fillTime);
+                elements[x, topRowIndex].MovableComponent.Move(x, topRowIndex, fillTime,false);
                 elements[x, topRowIndex].AppearanceComponent.SetAppearance((ElementAppearance.AppearanceType)
                     Random.Range(0, elements[x, topRowIndex].AppearanceComponent.AppearancesCount));
                 bMovedPiece = true;
@@ -401,17 +401,24 @@ public class BoardManager : MonoBehaviour
             elements[element1.X, element1.Y] = element2;
             elements[element2.X, element2.Y] = element1;
 
-            // Allow only matchable elements; check if they 
-            if (GetMatch(element1, element2.X, element2.Y) != null ||
-                GetMatch(element2, element1.X, element1.Y) != null)
-            {
-                // Store one of the elements X and Y position to use as reference
-                int element1X = element1.X;
-                int element1Y = element1.Y;
+            // Store one of the elements X and Y position to use as reference
+            int element1X = element1.X;
+            int element1Y = element1.Y;
+            // Store one of the elements X and Y position to use as reference
+            int element2X = element2.X;
+            int element2Y = element2.Y;
 
-                // Facilitate the visual movement of the pair
-                element1.MovableComponent.Move(element2.X, element2.Y, fillTime);
-                element2.MovableComponent.Move(element1X, element1Y, fillTime);
+            // Allow only matchable elements; check if they 
+            if (GetMatch(element1, element2X, element2Y) != null ||
+                GetMatch(element2, element1X, element1Y) != null)
+            {
+                /*// Store one of the elements X and Y position to use as reference
+                int element1X = element1.X;
+                int element1Y = element1.Y;*/
+
+                // Facilitate the visual movement of the pair 
+                element1.MovableComponent.Move(element2X, element2Y, fillTime,false);
+                element2.MovableComponent.Move(element1X, element1Y, fillTime,false);
 
                 // Clearing elements
                 ClearAllValidMatches();
@@ -422,6 +429,11 @@ public class BoardManager : MonoBehaviour
             {
                 elements[element1.X, element1.Y] = element1;
                 elements[element2.X, element2.Y] = element2;
+                // Facilitate the visual movement of the pair to indicate invalid move
+                element1.MovableComponent.Move(element2X, element2Y, fillTime, true);
+                element2.MovableComponent.Move(element1X, element1Y, fillTime, true);
+
+                
             }
             
         }
@@ -433,7 +445,7 @@ public class BoardManager : MonoBehaviour
     }
     public void EnterElement(GameElement element)
     {
-        if (element != pressedElement && Input.GetMouseButton(0))
+        if (element != pressedElement && pressedElement && Input.GetMouseButton(0))
         {
             Debug.Log("Entered");
             enteredElement = element;
@@ -444,10 +456,13 @@ public class BoardManager : MonoBehaviour
 
     public void ReleaseElement()
     {
-        if (IsAdjacent(pressedElement, enteredElement))
-        {
-            SwapElements(pressedElement, enteredElement);
+        if (IsAdjacent(pressedElement, enteredElement)) // if they're next to each other
+        { 
+            SwapElements(pressedElement, enteredElement); // attempt a swap
         }
+
+        pressedElement = null;
+        enteredElement = null;
     }
 
     public List<GameElement> GetMatch(GameElement element, int newX, int newY)

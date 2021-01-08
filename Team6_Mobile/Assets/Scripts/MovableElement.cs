@@ -6,6 +6,7 @@ public class MovableElement : MonoBehaviour
 {
     private GameElement gameElement;
     private IEnumerator movementCoroutine;
+    private IEnumerator bounceBackCoroutine;
 
     void Awake()
     {
@@ -23,22 +24,25 @@ public class MovableElement : MonoBehaviour
         
     }
 
-    public void Move(int toX, int toY, float time)
+    public void Move(int toX, int toY, float time, bool bounceBack)
     {
         /*gameElement.X = toX;
         gameElement.Y = toY;
 
         gameElement.transform.localPosition = new Vector3(toX,toY,0);*/
+        int startPosX = (int)gameElement.transform.localPosition.x;
+        int startPosY = (int)gameElement.transform.localPosition.y;
+        Vector3 initialTransform = gameElement.transform.localPosition;
         if (movementCoroutine != null)
         {
             StopCoroutine(movementCoroutine);
         }
 
-        movementCoroutine = MovementCoroutine(toX, toY, time);
+        movementCoroutine = MovementCoroutine(toX, toY, time, bounceBack, initialTransform);
         StartCoroutine(movementCoroutine);
     }
 
-    private IEnumerator MovementCoroutine(int toX, int toY, float time) // interpolate between the start and end position
+    private IEnumerator MovementCoroutine(int toX, int toY, float time, bool BouncesBack, Vector3 InitialTransform) // interpolate between the start and end position
     {
         gameElement.X = toX;
         gameElement.Y = toY;
@@ -61,5 +65,16 @@ public class MovableElement : MonoBehaviour
         }
 
         gameElement.transform.localPosition = endPos;
+        if ((int) gameElement.transform.localPosition.x == toX
+            && (int) gameElement.transform.localPosition.y == toY && BouncesBack)
+        {
+            if (bounceBackCoroutine != null)
+            {
+                StopCoroutine(bounceBackCoroutine);
+            }
+            bounceBackCoroutine = MovementCoroutine((int)InitialTransform.x, (int)InitialTransform.y,time, false, InitialTransform);
+            StartCoroutine(bounceBackCoroutine);
+        }
+
     }
 }
