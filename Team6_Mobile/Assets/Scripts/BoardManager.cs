@@ -433,7 +433,13 @@ public class BoardManager : MonoBehaviour
     }
     public void EnterElement(GameElement element)
     {
-        enteredElement = element;
+        if (element != pressedElement && Input.GetMouseButton(0))
+        {
+            Debug.Log("Entered");
+            enteredElement = element;
+            ReleaseElement();
+        }
+        
     }
 
     public void ReleaseElement()
