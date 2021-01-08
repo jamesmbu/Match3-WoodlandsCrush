@@ -35,6 +35,11 @@ public class ProgressionTracker : MonoBehaviour
     public 
     void Start()
     {
+        Canvas = GameObject.Find("Canvas"); 
+        WinPanel = GameObject.Find("Canvas/WinPanel");
+        LosePanel = GameObject.Find("Canvas/LosePanel");
+        WinPanel.SetActive(false);
+        LosePanel.SetActive(false);
         DisplayTurnsText = GameObject.Find("TurnsText").GetComponent<Text>();
 
         /* determine how many win conditions there are */
