@@ -447,7 +447,6 @@ public class BoardManager : MonoBehaviour
     {
         if (element != pressedElement && pressedElement && Input.GetMouseButton(0))
         {
-            Debug.Log("Entered");
             enteredElement = element;
             ReleaseElement();
         }
@@ -635,7 +634,6 @@ public class BoardManager : MonoBehaviour
 
                     if (match != null) // if not empty (then matches were found)
                     {
-                        Debug.Log("Matched: " + match.Count);
                         if (levelGenerated) progressionTracker.UpdateProgress(match); //increment score if map is loaded properly
                         for (int i = 0; i < match.Count; i++)
                         {
