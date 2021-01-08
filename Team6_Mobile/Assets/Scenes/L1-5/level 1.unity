@@ -304,6 +304,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1509608047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6951283725476083725, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+  m_PrefabInstance: {fileID: 3155619193650427649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1954429617 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3155619191832055216, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
@@ -434,6 +439,18 @@ PrefabInstance:
       propertyPath: WinPanel
       value: 
       objectReference: {fileID: 345273856}
+    - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
+      propertyPath: Turns
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
+      propertyPath: LosePanel
+      value: 
+      objectReference: {fileID: 1509608047}
+    - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
+      propertyPath: DisplayTurnsText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159715, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: PauseImageButton
       value: 
@@ -447,6 +464,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 284970255782858097, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -124.42575
+      objectReference: {fileID: 0}
+    - target: {fileID: 284970255782858097, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 284970255782858097, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 248.8515
+      objectReference: {fileID: 0}
+    - target: {fileID: 284970255782858097, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 74.60785
+      objectReference: {fileID: 0}
+    - target: {fileID: 284970255782858097, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 284970255782858097, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 307217502580152695, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
       propertyPath: Canvas
       value: 
@@ -590,6 +631,42 @@ PrefabInstance:
     - target: {fileID: 8475302897264187439, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -58.229553
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Text
+      value: TURNS TEXT
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8514701
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Color.b
+      value: 0.18974723
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035910894295047437, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}

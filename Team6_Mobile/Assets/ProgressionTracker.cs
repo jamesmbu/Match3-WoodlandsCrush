@@ -8,7 +8,7 @@ public class ProgressionTracker : MonoBehaviour
     public GameObject Canvas;
     public GameObject WinPanel;
     public GameObject LosePanel;
-
+    public Text DisplayTurnsText;
     public int Turns;
     // Public struct for setting conditions from the editor
     [System.Serializable]
@@ -35,6 +35,8 @@ public class ProgressionTracker : MonoBehaviour
     public 
     void Start()
     {
+        DisplayTurnsText = GameObject.Find("TurnsText").GetComponent<Text>();
+
         /* determine how many win conditions there are */
         for (int i = 0; i < LevelWinConditions.Length; i++)
         {
@@ -49,6 +51,11 @@ public class ProgressionTracker : MonoBehaviour
                 LevelWinConditions[i].DisplayText.text =
                     "0" + "/" + LevelWinConditions[i].WinRequirement.ToString();
             }
+        }
+
+        if (DisplayTurnsText)
+        {
+            DisplayTurnsText.text = "Moves: " + Turns.ToString();
         }
     }
 
@@ -135,12 +142,11 @@ public class ProgressionTracker : MonoBehaviour
     public void UseTurn()
     {
         Turns--;
+        DisplayTurnsText.text = "Moves: " + Turns.ToString();
         if (Turns <= 0)
         {
             Lose();
         }
-
-        Debug.Log("Turns remaining: " + Turns);
     }
     
 }
