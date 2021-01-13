@@ -434,6 +434,10 @@ PrefabInstance:
       propertyPath: WinPanel
       value: 
       objectReference: {fileID: 345273856}
+    - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
+      propertyPath: Turns
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159715, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: PauseImageButton
       value: 
@@ -635,23 +639,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
-      propertyPath: ObstacleInserts.Array.data[0].X
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
-      propertyPath: ObstacleInserts.Array.data[0].Y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
-      propertyPath: ObstacleInserts.Array.data[1].X
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
-      propertyPath: ObstacleInserts.Array.data[1].Y
+      propertyPath: ObstacleInserts.Array.data[0].X
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[0].Y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[1].X
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[1].Y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: width

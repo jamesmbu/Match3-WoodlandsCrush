@@ -65,6 +65,7 @@ public class BoardManager : MonoBehaviour
     private bool inverse = false;
     private Vector3 _position;
     public float outerMargin = 0.95f;
+    private bool boardIsRefilling;
     void Awake()
     {
         levelManagerRef = GameObject.Find("LevelManager");
@@ -74,6 +75,7 @@ public class BoardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        boardIsRefilling = false;
         topRowIndex = height - 1;
         // set initial location before anything is done
         _position = transform.position;
@@ -153,6 +155,7 @@ public class BoardManager : MonoBehaviour
 
     public IEnumerator Fill()
     {
+        boardIsRefilling = true;
         bool bNeedsRefill = true;
         // Debug.Log("Starts here (IENUM)");
         while (bNeedsRefill)
@@ -169,7 +172,7 @@ public class BoardManager : MonoBehaviour
         }
 
         levelGenerated = true; // marks the point when the board has been completely filled. Now, score will start to be tracked, obstacles can be cleared
-
+        boardIsRefilling = false;
     }
 
     public bool FillStep()
@@ -441,7 +444,7 @@ public class BoardManager : MonoBehaviour
 
     public void PressElement(GameElement element)
     {
-        pressedElement = element;
+        if (!boardIsRefilling) pressedElement = element;
     }
     public void EnterElement(GameElement element)
     {
