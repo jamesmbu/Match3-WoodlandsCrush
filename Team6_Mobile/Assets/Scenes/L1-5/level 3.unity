@@ -635,7 +635,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[0].X
@@ -647,11 +647,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[1].X
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[1].Y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: width
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: outerMargin
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: height
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097693, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: m_LocalPosition.x

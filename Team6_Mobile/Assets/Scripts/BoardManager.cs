@@ -64,7 +64,7 @@ public class BoardManager : MonoBehaviour
     private int topRowIndex;
     private bool inverse = false;
     private Vector3 _position;
-
+    public float outerMargin = 0.95f;
     void Awake()
     {
         levelManagerRef = GameObject.Find("LevelManager");
@@ -361,8 +361,8 @@ public class BoardManager : MonoBehaviour
         //Debug.Log("Desired Width Multiplier: " + desiredWidthFactor);
 
         // set new width values
-        tileWidth *= desiredWidthFactor*0.95f; // 0.95 gives a 5% margin of space on the width (should change hardcoded value to variable)
-        boardWidth *= desiredWidthFactor*0.95f;
+        tileWidth *= desiredWidthFactor*outerMargin; // 0.95 gives a 5% margin of space on the width (should change hardcoded value to variable)
+        boardWidth *= desiredWidthFactor*outerMargin;
 
         /* ~~~~~~
          HEIGHT CALCULATIONS
@@ -377,7 +377,7 @@ public class BoardManager : MonoBehaviour
         //Debug.Log("Board Height: " + boardHeight);
 
         // re-scale the board
-        transform.localScale *= desiredWidthFactor*0.95f;
+        transform.localScale *= desiredWidthFactor*outerMargin;
         
 
         // align board to center side of screen
@@ -584,14 +584,14 @@ public class BoardManager : MonoBehaviour
                 {
                     for (int dir = 0; dir <= 1; dir++)
                     {
-                        for (int xOffset = 1; xOffset < height; xOffset++)
+                        for (int xOffset = 1; xOffset < width; xOffset++)
                         {
                             int x;
 
                             if (dir == 0) x = newX - xOffset; // Left
                             else x = newX + xOffset; // Right
 
-                            if (x < 0 || x >= height) break; // Out of bounds 
+                            if (x < 0 || x >= width) break; // Out of bounds 
 
                             if (elements[x, verticalElements[i].Y].appearanceIsSet() &&
                                 elements[x, verticalElements[i].Y].AppearanceComponent.Appearance == appearance)
