@@ -655,15 +655,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: width
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: outerMargin
-      value: 0.75
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: height
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097693, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: m_LocalPosition.x
