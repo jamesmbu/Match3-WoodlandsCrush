@@ -238,6 +238,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &643899071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3155619192405575831, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+  m_PrefabInstance: {fileID: 3155619193650427649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &996597085
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[2].type
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[3].type
@@ -392,15 +403,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[0].WinRequirement
-      value: 20
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[2].WinRequirement
-      value: 20
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[3].WinRequirement
-      value: 12
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[0].DisplayText
@@ -425,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[3].DisplayImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 643899071}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: Canvas
       value: 
@@ -434,6 +445,14 @@ PrefabInstance:
       propertyPath: WinPanel
       value: 
       objectReference: {fileID: 345273856}
+    - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
+      propertyPath: LevelWinConditions.Array.data[0].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
+      propertyPath: Turns
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159715, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: PauseImageButton
       value: 
@@ -459,10 +478,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3155619191832055216, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0224bfeb362b2e42885fefe989f4ba2, type: 3}
     - target: {fileID: 3155619193035157635, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3155619193149292654, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fe94beffbde91874eb96af39c3e1abb8, type: 3}
     - target: {fileID: 3155619193628737730, guid: 6f7019b09019c0842b53c96ee2700d56, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -633,6 +660,126 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: height
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: outerMargin
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: width
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[0].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[1].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[2].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[3].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[4].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[5].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[6].Y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[1].X
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[2].X
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[3].X
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[4].X
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[5].X
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[6].X
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[7].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[8].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[9].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[10].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[11].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[12].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[13].Y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[8].X
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[9].X
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[10].X
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[11].X
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[12].X
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
+      propertyPath: ObstacleInserts.Array.data[13].X
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097693, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

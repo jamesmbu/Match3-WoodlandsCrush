@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: levelSelectorPrefab Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2751449732324005974, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
+      propertyPath: TargetLevel
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2751449732324005976, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.0250103
@@ -670,6 +674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: levelSelectorPrefab Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2751449732324005974, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
+      propertyPath: TargetLevel
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 2751449732324005976, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1819687
@@ -726,6 +734,10 @@ PrefabInstance:
     - target: {fileID: 2751449732324005973, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_Name
       value: levelSelectorPrefab Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751449732324005974, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
+      propertyPath: TargetLevel
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 2751449732324005976, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -948,6 +960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: levelSelectorPrefab Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2751449732324005974, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
+      propertyPath: TargetLevel
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 2751449732324005976, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.2356217
@@ -1075,6 +1091,10 @@ PrefabInstance:
     - target: {fileID: 2751449732324005973, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_Name
       value: levelSelectorPrefab Variant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751449732324005974, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
+      propertyPath: TargetLevel
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2751449732324005976, guid: 3f185e4e7b9dcee45a8bb6c80fe7cbed, type: 3}
       propertyPath: m_LocalPosition.x

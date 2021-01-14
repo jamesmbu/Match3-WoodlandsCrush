@@ -436,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 345273856}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: Turns
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[1].WinRequirement

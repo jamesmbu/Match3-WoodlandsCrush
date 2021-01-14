@@ -436,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 345273856}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: Turns
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[2].WinReached
@@ -659,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: outerMargin
-      value: 0.8
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[0].X
