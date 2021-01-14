@@ -392,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[0].WinRequirement
-      value: 28
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[2].WinRequirement
@@ -400,7 +400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[3].WinRequirement
-      value: 28
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[0].DisplayText
@@ -436,11 +436,11 @@ PrefabInstance:
       objectReference: {fileID: 345273856}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: Turns
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[1].WinRequirement
-      value: 60
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2549075100160159714, guid: 0864c42f1b02f3a4cae92b44e25e6094, type: 3}
       propertyPath: LevelWinConditions.Array.data[1].DisplayText
@@ -659,19 +659,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: width
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: height
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[0].Y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[1].Y
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[2].Y
@@ -679,19 +679,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[0].X
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[1].X
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[2].X
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[3].X
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8251637899908097692, guid: b985ccf4285c6ef438b6570a8347a946, type: 3}
       propertyPath: ObstacleInserts.Array.data[3].Y
