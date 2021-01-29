@@ -41,7 +41,7 @@ public class ClearableElement : MonoBehaviour
         Animator animator = GetComponent<Animator>();
         if (animator)
         {
-            animator.Play(clearAnimation.name);
+            //animator.Play(clearAnimation.name);
             yield return new WaitForSeconds(clearAnimation.length);
 
             Destroy(gameObject);

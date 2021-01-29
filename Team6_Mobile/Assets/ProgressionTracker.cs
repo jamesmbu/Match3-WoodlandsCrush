@@ -101,7 +101,8 @@ public class ProgressionTracker : MonoBehaviour
                     LevelWinConditions[i].DisplayText.color = Color.green; // green text when goal is met
                 }
                 LevelWinConditions[i].DisplayText.text = 
-                    elementTypeCount[LevelWinConditions[i].type].ToString() + "/" + LevelWinConditions[i].WinRequirement.ToString();
+                    elementTypeCount[LevelWinConditions[i].type].ToString() + "/" + 
+                    LevelWinConditions[i].WinRequirement.ToString();
             }
         }
 
